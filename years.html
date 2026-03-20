@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Me Over the Years 🌸 — Pavi's Slam Book</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Lobster&family=Pacifico&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+    /* ── HERO ── */
+    .years-hero {
+      text-align: center;
+      padding: 60px 24px 36px;
+      background: linear-gradient(135deg, #fce7f3 0%, #ede9fe 50%, #fef9c3 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .years-hero::before {
+      content: "✨🌸🌟💖🎀🌈";
+      font-size: 1.6rem;
+      display: block;
+      letter-spacing: 12px;
+      margin-bottom: 14px;
+      opacity: .7;
+    }
+    .years-hero h1 {
+      font-family: 'Lobster', cursive;
+      font-size: 3.4rem;
+      color: #f472b6;
+      text-shadow: 3px 3px 0 #ffd6e7, 0 0 24px rgba(244,114,182,.3);
+      margin-bottom: 10px;
+    }
+    .years-hero p {
+      color: #7c3aed;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* ── TIMELINE LABEL ── */
+    .timeline-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 24px;
+      background: white;
+      border-bottom: 2px solid #fce4ec;
+      flex-wrap: wrap;
+    }
+    .tl-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f472b6, #a78bfa);
+      flex-shrink: 0;
+    }
+    .tl-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, #f9a8d4, #c4b5fd, #93c5fd);
+      min-width: 20px;
+      max-width: 60px;
+    }
+    .tl-label {
+      font-size: .72rem;
+      font-weight: 700;
+      color: #c2185b;
+      white-space: nowrap;
+    }
+
+    /* ── PHOTO GRID ── */
+    .years-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+    .years-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* ── PHOTO CARD ── */
+    .year-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(164,60,140,.10);
+      border: 3px solid #fce4ec;
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+      position: relative;
+    }
+    .year-card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      box-shadow: 0 18px 44px rgba(164,60,140,.20);
+    }
+    .year-card:nth-child(even):hover { transform: translateY(-8px) rotate(1deg); }
+
+    /* Polaroid tape effect */
+    .year-card::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: 50%;
+      transform: translateX(-50%);
+      width: 48px; height: 16px;
+      background: rgba(244,114,182,.35);
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    /* ── PHOTO FRAME ── */
+    .year-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: #f9f0ff;
+    }
+    .year-photo.enhanced {
+      filter: brightness(1.12) contrast(1.10) saturate(1.25) sharpen(1);
+      transition: filter .3s;
+    }
+    .year-card:hover .year-photo.enhanced {
+      filter: brightness(1.18) contrast(1.15) saturate(1.35);
+    }
+
+    /* Placeholder when no photo */
+    .year-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: #c084fc;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    .year-placeholder .ph-emoji { font-size: 2.8rem; }
+    .year-placeholder:hover { background: #f3e8ff; }
+
+    /* ── CARD BODY ── */
+    .year-body {
+      padding: 16px 18px 20px;
+      background: white;
+    }
+    .year-age-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--bc1), var(--bc2));
+      color: white;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .year-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1rem;
+      color: #c2185b;
+      margin-bottom: 6px;
+    }
+    .year-caption {
+      font-size: .8rem;
+      color: #6b7280;
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ── REACTION ROW ── */
+    .year-reactions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .react-btn {
+      background: #fff0f5;
+      border: 2px solid #fce4ec;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'Poppins', sans-serif;
+      color: #c2185b;
+    }
+    .react-btn:hover, .react-btn.active {
+      background: linear-gradient(135deg, #f9a8d4, #c4b5fd);
+      border-color: transparent;
+      color: white;
+      transform: scale(1.08);
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(30,10,50,.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      max-width: 520px;
+      width: 90%;
+      box-shadow: 0 30px 80px rgba(0,0,0,.3);
+      animation: popIn .3s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(.85); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .lightbox-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .lightbox-ph {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    .lightbox-info { padding: 20px 24px 24px; }
+    .lightbox-info h2 { font-family: 'Pacifico', cursive; color: #c2185b; font-size: 1.4rem; margin-bottom: 6px; }
+    .lightbox-info p  { font-size: .88rem; color: #6b7280; line-height: 1.6; }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: white;
+      line-height: 1;
+      transition: transform .2s;
+    }
+    .lightbox-close:hover { transform: scale(1.2) rotate(90deg); }
+
+    /* ── UPLOAD HINT ── */
+    .upload-hint {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background: linear-gradient(135deg, #fce7f3, #ede9fe);
+      border-radius: 16px;
+      font-size: .88rem;
+      color: #7c3aed;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) { .years-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .years-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">💖 Pavi's Slam Book</div>
+      <nav class="main-nav">
+        <a href="index.html#cover">Home</a>
+        <a href="index.html#featured">All about me</a>
+        <a href="friends.html">All about my friends</a>
+        <a href="years.html" class="nav-active">Me over the years</a>
+        <a href="journeys.html">My Journeys</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="years-hero">
+    <h1>Me Over the Years</h1>
+    <p>A little walk through time — growing, glowing & being fabulous 💅</p>
+  </div>
+
+  <!-- TIMELINE BAR -->
+  <div class="timeline-bar">
+    <div class="tl-dot"></div>
+    <div class="tl-line"></div><span class="tl-label">Age 1</span>
+    <div class="tl-line"></div><span class="tl-label">Age 2</span>
+    <div class="tl-line"></div><span class="tl-label">Age 3</span>
+    <div class="tl-line"></div><span class="tl-label">Age 4</span>
+    <div class="tl-line"></div><span class="tl-label">Age 5</span>
+    <div class="tl-line"></div><span class="tl-label">Age 6</span>
+    <div class="tl-line"></div><span class="tl-label">Age 7</span>
+    <div class="tl-line"></div><span class="tl-label">Age 8</span>
+    <div class="tl-line"></div><span class="tl-label">Age 9</span>
+    <div class="tl-line"></div>
+    <div class="tl-dot"></div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>👶 Baby Pavi</span><span>🌸 Growing Up</span><span>✨ Every Year Glows</span>
+      <span>💖 Precious Memories</span><span>🎀 Little & Lovely</span><span>🌈 My Story</span>
+      <span>👶 Baby Pavi</span><span>🌸 Growing Up</span><span>✨ Every Year Glows</span>
+      <span>💖 Precious Memories</span><span>🎀 Little & Lovely</span><span>🌈 My Story</span>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="years-container">
+    <div class="years-grid">
+
+      <!-- Card 1 -->
+      <div class="year-card" onclick="openLight(1)">
+        <img class="year-photo" src="Photos/Age 1.jpg" alt="Age 1" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#f9a8d4;--bc2:#f472b6">Age 1 · 2016</span>
+          <div class="year-title">My Very First Year 🍼</div>
+          <div class="year-caption">Tiny fingers, tiny toes — the world just got a whole lot cuter!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">🥰 Aww</button>
+            <button class="react-btn" onclick="react(event,this)">💖 Love</button>
+            <button class="react-btn" onclick="react(event,this)">😍 Cute</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="year-card" onclick="openLight(2)">
+        <img class="year-photo" src="Photos/Age 2.jpg" alt="Age 2" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#93c5fd;--bc2:#60a5fa">Age 2 · 2017</span>
+          <div class="year-title">Toddler Trouble 😈</div>
+          <div class="year-caption">Walking, talking, and already running the house!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">🥰 Aww</button>
+            <button class="react-btn" onclick="react(event,this)">😂 Lol</button>
+            <button class="react-btn" onclick="react(event,this)">💙 Sweet</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="year-card" onclick="openLight(3)">
+        <img class="year-photo enhanced" src="Photos/Age 3.jpeg?v=2" alt="Age 3" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#fde68a;--bc2:#fbbf24">Age 3 · 2018</span>
+          <div class="year-title">Sunshine & Giggles ☀️</div>
+          <div class="year-caption">Coloured everything, including the walls. No regrets!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">😂 Lol</button>
+            <button class="react-btn" onclick="react(event,this)">🌟 Star</button>
+            <button class="react-btn" onclick="react(event,this)">💛 Cute</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="year-card" onclick="openLight(4)">
+        <img class="year-photo" src="Photos/Age 4.jpg" alt="Age 4" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#6ee7b7;--bc2:#34d399">Age 4 · 2019</span>
+          <div class="year-title">Little Explorer 🔍</div>
+          <div class="year-caption">Every puddle, every bug, every flower — a brand new discovery!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">🥰 Aww</button>
+            <button class="react-btn" onclick="react(event,this)">💚 Love</button>
+            <button class="react-btn" onclick="react(event,this)">🌟 Star</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="year-card" onclick="openLight(5)">
+        <img class="year-photo enhanced" src="Photos/Age 5.jpeg?v=2" alt="Age 5" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#c4b5fd;--bc2:#a78bfa">Age 5 · 2020</span>
+          <div class="year-title">School Days Begin 🎒</div>
+          <div class="year-caption">New bag, new friends, new adventures — ready for the world!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">🎒 School</button>
+            <button class="react-btn" onclick="react(event,this)">💜 Love</button>
+            <button class="react-btn" onclick="react(event,this)">✨ Magic</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="year-card" onclick="openLight(6)">
+        <img class="year-photo" src="Photos/Age 6.jpeg" alt="Age 6" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#fda4af;--bc2:#fb7185">Age 6 · 2021</span>
+          <div class="year-title">Little Artist 🖌️</div>
+          <div class="year-caption">Every drawing was a masterpiece. Even the stick figures!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">🎨 Art</button>
+            <button class="react-btn" onclick="react(event,this)">💖 Love</button>
+            <button class="react-btn" onclick="react(event,this)">😍 Cute</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="year-card" onclick="openLight(7)">
+        <img class="year-photo enhanced" src="Photos/Age 7.jpeg?v=2" alt="Age 7" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#f9a8d4;--bc2:#ec4899">Age 7 · 2022</span>
+          <div class="year-title">Blooming Bright 🌺</div>
+          <div class="year-caption">Confidence growing, smile shining — becoming more ME every day!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">💖 Pavi's Slam Book</button>
+            <button class="react-btn" onclick="react(event,this)">💖 Love</button>
+            <button class="react-btn" onclick="react(event,this)">🔥 Glow</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="year-card" onclick="openLight(8)">
+        <img class="year-photo enhanced" src="Photos/Age 8.jpeg?v=3" alt="Age 8" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#38bdf8;--bc2:#0ea5e9">Age 8 · 2023</span>
+          <div class="year-title">Star in the Making 🌟</div>
+          <div class="year-caption">Dreaming big, laughing loud, and owning every room I walked into!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">⭐ Star</button>
+            <button class="react-btn" onclick="react(event,this)">💙 Love</button>
+            <button class="react-btn" onclick="react(event,this)">😎 Cool</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="year-card" onclick="openLight(9)">
+        <img class="year-photo" src="Photos/Age 9.jpg" alt="Age 9" />
+        <div class="year-body">
+          <span class="year-age-badge" style="--bc1:#fbbf24;--bc2:#f59e0b">Age 9 · 2024</span>
+          <div class="year-title">Queen of Everything 👑</div>
+          <div class="year-caption">Nine years of pure magic — the best is absolutely still to come!</div>
+          <div class="year-reactions">
+            <button class="react-btn" onclick="react(event,this)">👑 Queen</button>
+            <button class="react-btn" onclick="react(event,this)">💛 Love</button>
+            <button class="react-btn" onclick="react(event,this)">🎉 Yay</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLight(event)">
+    <span class="lightbox-close" onclick="closeLightBtn()">✕</span>
+    <div class="lightbox-inner">
+      <div class="lightbox-ph" id="lb-ph"></div>
+      <div class="lightbox-info">
+        <h2 id="lb-title"></h2>
+        <p id="lb-caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">💖 Pavi's Slam Book</div>
+        <p>A little book full of big memories, best friends &amp; beautiful moments. 🌸</p>
+        <div class="socials">
+          <a href="#">📸</a><a href="#">🎵</a><a href="#">📌</a><a href="#">🐦</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="aboutme.html">All About Me</a>
+        <a href="friends.html">My Friends</a>
+        <a href="years.html">Me Over the Years</a>
+      </div>
+      <div class="footer-links">
+        <h4>Memories</h4>
+        <a href="#">Favourite Moments</a>
+        <a href="#">School Days</a>
+        <a href="#">Fun &amp; Games</a>
+        <a href="#">Bucket List</a>
+      </div>
+      <div class="footer-links">
+        <h4>Connect</h4>
+        <a href="#">Leave a Message</a>
+        <a href="#">Sign My Book</a>
+        <a href="#">Send a Doodle</a>
+        <a href="#">Say Hi 👋</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Pavi's Slam Book. Made with 💖 — because every memory deserves to be kept forever.</p>
+    </div>
+  </footer>
+
+  <script>
+    const cards = [
+      { emoji:'👶', title:"My Very First Year 🍼",    caption:"Tiny fingers, tiny toes — the world just got a whole lot cuter!" },
+      { emoji:'🐣', title:"Toddler Trouble 😈",        caption:"Walking, talking, and already running the house!" },
+      { emoji:'🌻', title:"Sunshine & Giggles ☀️",    caption:"Coloured everything, including the walls. No regrets!" },
+      { emoji:'🌿', title:"Little Explorer 🔍",         caption:"Every puddle, every bug, every flower — a brand new discovery!" },
+      { emoji:'🦋', title:"School Days Begin 🎒",       caption:"New bag, new friends, new adventures — ready for the world!" },
+      { emoji:'🎨', title:"Little Artist 🖌️",           caption:"Every drawing was a masterpiece. Even the stick figures!" },
+      { emoji:'🌸', title:"Blooming Bright 🌺",         caption:"Confidence growing, smile shining — becoming more ME every day!" },
+      { emoji:'⭐', title:"Star in the Making 🌟",      caption:"Dreaming big, laughing loud, and owning every room I walked into!" },
+      { emoji:'👑', title:"Queen of Everything 👑",    caption:"Nine years of pure magic — the best is absolutely still to come!" },
+    ];
+
+    function openLight(n) {
+      const c = cards[n - 1];
+      document.getElementById('lb-ph').textContent      = c.emoji;
+      document.getElementById('lb-title').textContent   = c.title;
+      document.getElementById('lb-caption').textContent = c.caption;
+      document.getElementById('lb-ph').style.background =
+        ['linear-gradient(135deg,#fce7f3,#ffd6e7)',
+         'linear-gradient(135deg,#e0f2fe,#bae6fd)',
+         'linear-gradient(135deg,#fef9c3,#fde68a)',
+         'linear-gradient(135deg,#dcfce7,#bbf7d0)',
+         'linear-gradient(135deg,#ede9fe,#c4b5fd)',
+         'linear-gradient(135deg,#fecdd3,#fda4af)',
+         'linear-gradient(135deg,#fce7f3,#fbcfe8)',
+         'linear-gradient(135deg,#e0f2fe,#bae6fd)',
+         'linear-gradient(135deg,#fef9c3,#fde68a)'][n - 1];
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLight(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightBtn();
+    }
+    function closeLightBtn() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    function react(e, btn) {
+      e.stopPropagation();
+      btn.classList.toggle('active');
+    }
+
+    // Keyboard close
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightBtn();
+    });
+  </script>
+
+</body>
+</html>

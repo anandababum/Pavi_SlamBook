@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Journeys ✈️ — Pavi's Slam Book</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Lobster&family=Pacifico&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+
+    /* ── HERO ── */
+    .journeys-hero {
+      text-align: center;
+      padding: 60px 24px 36px;
+      background: linear-gradient(135deg, #e0f2fe 0%, #ede9fe 50%, #fce7f3 100%);
+    }
+    .journeys-hero::before {
+      content: "✈️🌍🗺️💖🌏";
+      font-size: 1.6rem;
+      display: block;
+      letter-spacing: 12px;
+      margin-bottom: 14px;
+      opacity: .75;
+    }
+    .journeys-hero h1 {
+      font-family: 'Lobster', cursive;
+      font-size: 3.4rem;
+      color: #f472b6;
+      text-shadow: 3px 3px 0 #ffd6e7, 0 0 24px rgba(244,114,182,.3);
+      margin-bottom: 10px;
+    }
+    .journeys-hero p {
+      color: #7c3aed;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* ── COUNTRY TABS ── */
+    .country-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 36px 24px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .country-tab {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: 3px solid #fce4ec;
+      background: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all .25s;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
+    }
+    .country-tab .flag { font-size: 1.6rem; }
+    .country-tab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0,0,0,.1);
+      border-color: #f9a8d4;
+      color: #c2185b;
+    }
+    .country-tab.active {
+      background: linear-gradient(135deg, var(--tc1), var(--tc2));
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+      transform: translateY(-4px);
+    }
+
+    /* ── COUNTRY PANELS ── */
+    .journeys-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+    .country-panel {
+      display: none;
+      animation: fadeSlideIn .45s ease;
+    }
+    .country-panel.active { display: block; }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PANEL HEADER ── */
+    .panel-header {
+      border-radius: 24px;
+      padding: 40px 40px 36px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .panel-header::after {
+      content: '';
+      position: absolute;
+      right: -30px; top: -30px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+    }
+    .panel-flag { font-size: 5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,.2)); }
+    .panel-title h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+    .panel-title p { font-size: .95rem; opacity: .9; line-height: 1.6; }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,.07);
+      border: 2px solid #fce4ec;
+      transition: transform .25s;
+    }
+    .info-card:hover { transform: translateY(-5px); }
+    .info-card .ic-emoji { font-size: 2rem; margin-bottom: 8px; display: block; }
+    .info-card .ic-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #9ca3af; margin-bottom: 6px; }
+    .info-card .ic-value { font-size: .95rem; font-weight: 700; color: #1e1b4b; }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      color: #c2185b;
+      margin-bottom: 14px;
+    }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .highlight-item {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
+      border-left: 4px solid var(--hc, #f472b6);
+      transition: transform .2s;
+    }
+    .highlight-item:hover { transform: translateX(4px); }
+    .highlight-item .hi-emoji { font-size: 1.6rem; flex-shrink: 0; }
+    .highlight-item .hi-text strong { display: block; font-size: .88rem; font-weight: 700; color: #1e1b4b; margin-bottom: 2px; }
+    .highlight-item .hi-text span  { font-size: .78rem; color: #6b7280; }
+
+    /* ── MEMORY QUOTE ── */
+    .memory-quote {
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 8px;
+      border-left: 5px solid var(--qc, #f472b6);
+      background: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+    }
+    .memory-quote p {
+      font-size: 1rem;
+      font-style: italic;
+      color: #4b5563;
+      line-height: 1.7;
+    }
+    .memory-quote span { font-size: .82rem; font-weight: 700; color: var(--qc, #f472b6); margin-top: 8px; display: block; }
+
+    /* ── STAMP ── */
+    .stamp {
+      display: inline-block;
+      border: 3px solid var(--sc, #f472b6);
+      border-radius: 8px;
+      padding: 6px 16px;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--sc, #f472b6);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-top: 20px;
+      opacity: .8;
+      transform: rotate(-2deg);
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+      .info-grid        { grid-template-columns: repeat(2, 1fr); }
+      .highlights-grid  { grid-template-columns: 1fr; }
+      .panel-header     { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .country-tabs { gap: 10px; }
+      .country-tab { padding: 10px 18px; font-size: .82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">💖 Pavi's Slam Book</div>
+      <nav class="main-nav">
+        <a href="index.html#cover">Home</a>
+        <a href="aboutme.html">All about me</a>
+        <a href="friends.html">All about my friends</a>
+        <a href="years.html">Me over the years</a>
+        <a href="journeys.html" class="nav-active">My Journeys</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="journeys-hero">
+    <h1>My Journeys</h1>
+    <p>Every trip is a new chapter in my story ✈️🌸</p>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>🇮🇳 India</span><span>🇸🇬 Singapore</span><span>🇲🇾 Malaysia</span><span>🇦🇪 UAE</span>
+      <span>✈️ Wanderlust</span><span>🌏 World Explorer</span><span>📸 Travel Memories</span>
+      <span>🇮🇳 India</span><span>🇸🇬 Singapore</span><span>🇲🇾 Malaysia</span><span>🇦🇪 UAE</span>
+      <span>✈️ Wanderlust</span><span>🌏 World Explorer</span><span>📸 Travel Memories</span>
+    </div>
+  </div>
+
+  <!-- COUNTRY TABS -->
+  <div class="country-tabs">
+    <button class="country-tab active" style="--tc1:#ff9a3c;--tc2:#ff6b35" data-country="india"      onclick="switchCountry('india',this)">
+      <span class="flag">🇮🇳</span> India
+    </button>
+    <button class="country-tab" style="--tc1:#e63946;--tc2:#c1121f" data-country="singapore"  onclick="switchCountry('singapore',this)">
+      <span class="flag">🇸🇬</span> Singapore
+    </button>
+    <button class="country-tab" style="--tc1:#2d9e63;--tc2:#1a7a47" data-country="malaysia"   onclick="switchCountry('malaysia',this)">
+      <span class="flag">🇲🇾</span> Malaysia
+    </button>
+    <button class="country-tab" style="--tc1:#009688;--tc2:#00796b" data-country="uae"        onclick="switchCountry('uae',this)">
+      <span class="flag">🇦🇪</span> UAE
+    </button>
+  </div>
+
+  <div class="journeys-container">
+
+    <!-- ══ INDIA ══ -->
+    <div class="country-panel active" id="panel-india">
+      <div class="panel-header" style="background:linear-gradient(135deg,#ff9a3c,#ff6b35)">
+        <span class="panel-flag">🇮🇳</span>
+        <div class="panel-title">
+          <h2>India — My Home 🏠</h2>
+          <p>Where it all began — the colours, the chaos, the love, the food, and the warmth that no other place can match.</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="ic-emoji">🌆</span>
+          <div class="ic-label">Home State</div>
+          <div class="ic-value">Tamil Nadu</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🌡️</span>
+          <div class="ic-label">Weather</div>
+          <div class="ic-value">Hot & Tropical ☀️</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🍛</span>
+          <div class="ic-label">Fav Local Food</div>
+          <div class="ic-value">Idli & Dosa</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🎉</span>
+          <div class="ic-label">Best Festival</div>
+          <div class="ic-value">Pongal 🌾</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🏛️</span>
+          <div class="ic-label">Must See</div>
+          <div class="ic-value">Meenakshi Temple</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">💃</span>
+          <div class="ic-label">Local Art</div>
+          <div class="ic-value">Bharatanatyam</div>
+        </div>
+      </div>
+
+      <div class="highlights-title">✨ My Favourite Highlights</div>
+      <div class="highlights-grid">
+        <div class="highlight-item" style="--hc:#ff6b35">
+          <span class="hi-emoji">🌊</span>
+          <div class="hi-text"><strong>Marina Beach</strong><span>One of the longest beaches in the world — sunsets here are magical!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#ff9a3c">
+          <span class="hi-emoji">🎨</span>
+          <div class="hi-text"><strong>Kolam Art</strong><span>The beautiful rice flour patterns drawn every morning outside homes.</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#ff6b35">
+          <span class="hi-emoji">🛕</span>
+          <div class="hi-text"><strong>Temple Visits</strong><span>The towering gopurams and the smell of jasmine make every visit special.</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#ff9a3c">
+          <span class="hi-emoji">🎵</span>
+          <div class="hi-text"><strong>Tamil Music</strong><span>From classical Carnatic to modern beats — music is in Tamil Nadu's soul.</span></div>
+        </div>
+      </div>
+
+      <div class="memory-quote" style="--qc:#ff6b35">
+        <p>"India isn't just where I'm from — it's who I am. Every street, every smell, every colour is a part of my heart." 💛</p>
+        <span>— Pavi's favourite memory 🌸</span>
+      </div>
+      <div class="stamp" style="--sc:#ff6b35">📍 Home Sweet Home</div>
+    </div>
+
+    <!-- ══ SINGAPORE ══ -->
+    <div class="country-panel" id="panel-singapore">
+      <div class="panel-header" style="background:linear-gradient(135deg,#e63946,#c1121f)">
+        <span class="panel-flag">🇸🇬</span>
+        <div class="panel-title">
+          <h2>Singapore — The Lion City 🦁</h2>
+          <p>A sparkling city of gardens, food, and sky-high adventures — clean, bright, and absolutely breathtaking!</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="ic-emoji">🌆</span>
+          <div class="ic-label">City Vibe</div>
+          <div class="ic-value">Futuristic & Clean</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🌡️</span>
+          <div class="ic-label">Weather</div>
+          <div class="ic-value">Warm & Humid</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🍜</span>
+          <div class="ic-label">Fav Food</div>
+          <div class="ic-value">Laksa & Chilli Crab</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🎡</span>
+          <div class="ic-label">Top Spot</div>
+          <div class="ic-value">Sentosa Island</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🌿</span>
+          <div class="ic-label">Must Visit</div>
+          <div class="ic-value">Gardens by the Bay</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🛍️</span>
+          <div class="ic-label">Shopping</div>
+          <div class="ic-value">Orchard Road</div>
+        </div>
+      </div>
+
+      <div class="highlights-title">✨ My Favourite Highlights</div>
+      <div class="highlights-grid">
+        <div class="highlight-item" style="--hc:#e63946">
+          <span class="hi-emoji">🌳</span>
+          <div class="hi-text"><strong>Gardens by the Bay</strong><span>The Supertree Grove lit up at night — like walking into a fairy tale!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#c1121f">
+          <span class="hi-emoji">🎢</span>
+          <div class="hi-text"><strong>Universal Studios</strong><span>The rides, the characters, the magic — every corner was a new adventure!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#e63946">
+          <span class="hi-emoji">🦁</span>
+          <div class="hi-text"><strong>Singapore Zoo</strong><span>One of the best zoos in the world — seeing animals up close was amazing!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#c1121f">
+          <span class="hi-emoji">🌉</span>
+          <div class="hi-text"><strong>Marina Bay Sands</strong><span>The iconic infinity pool view from the top takes your breath away!</span></div>
+        </div>
+      </div>
+
+      <div class="memory-quote" style="--qc:#e63946">
+        <p>"Singapore showed me that a city can be as beautiful as a garden. I never wanted to leave!" 🌺</p>
+        <span>— Pavi's favourite memory 🌸</span>
+      </div>
+      <div class="stamp" style="--sc:#e63946">📍 Visited & Loved</div>
+    </div>
+
+    <!-- ══ MALAYSIA ══ -->
+    <div class="country-panel" id="panel-malaysia">
+      <div class="panel-header" style="background:linear-gradient(135deg,#2d9e63,#1a7a47)">
+        <span class="panel-flag">🇲🇾</span>
+        <div class="panel-title">
+          <h2>Malaysia — Truly Asia 🌴</h2>
+          <p>Lush rainforests, towering twin towers, amazing street food and the most colourful culture mix!</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="ic-emoji">🌆</span>
+          <div class="ic-label">Capital City</div>
+          <div class="ic-value">Kuala Lumpur</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🌡️</span>
+          <div class="ic-label">Weather</div>
+          <div class="ic-value">Tropical 🌴</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🍱</span>
+          <div class="ic-label">Fav Food</div>
+          <div class="ic-value">Nasi Lemak</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🏙️</span>
+          <div class="ic-label">Landmark</div>
+          <div class="ic-value">Petronas Twin Towers</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🦧</span>
+          <div class="ic-label">Wildlife</div>
+          <div class="ic-value">Orangutans 🐒</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🕌</span>
+          <div class="ic-label">Culture</div>
+          <div class="ic-value">Malay, Chinese, Indian</div>
+        </div>
+      </div>
+
+      <div class="highlights-title">✨ My Favourite Highlights</div>
+      <div class="highlights-grid">
+        <div class="highlight-item" style="--hc:#2d9e63">
+          <span class="hi-emoji">🏙️</span>
+          <div class="hi-text"><strong>Petronas Twin Towers</strong><span>Standing below those towers and looking up felt like touching the sky!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#1a7a47">
+          <span class="hi-emoji">🦋</span>
+          <div class="hi-text"><strong>Batu Caves</strong><span>The giant golden statue and rainbow stairs made it truly unforgettable.</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#2d9e63">
+          <span class="hi-emoji">🌊</span>
+          <div class="hi-text"><strong>Langkawi Island</strong><span>Crystal clear water, white sand, and the most stunning sunsets!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#1a7a47">
+          <span class="hi-emoji">🍢</span>
+          <div class="hi-text"><strong>Street Food Heaven</strong><span>Jalan Alor food street — every bite was a flavour explosion!</span></div>
+        </div>
+      </div>
+
+      <div class="memory-quote" style="--qc:#2d9e63">
+        <p>"Malaysia surprised me with how much there was to see — rainforests, skyscrapers, beaches and the yummiest food! Truly Asia!" 🌴</p>
+        <span>— Pavi's favourite memory 🌸</span>
+      </div>
+      <div class="stamp" style="--sc:#2d9e63">📍 Truly Asia ✅</div>
+    </div>
+
+    <!-- ══ UAE ══ -->
+    <div class="country-panel" id="panel-uae">
+      <div class="panel-header" style="background:linear-gradient(135deg,#009688,#00796b)">
+        <span class="panel-flag">🇦🇪</span>
+        <div class="panel-title">
+          <h2>UAE — Land of Wonders 🌙</h2>
+          <p>Golden deserts, dazzling skyscrapers, luxury malls and a magical blend of tradition and ultra-modern life!</p>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="ic-emoji">🌆</span>
+          <div class="ic-label">City</div>
+          <div class="ic-value">Dubai & Abu Dhabi</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🌡️</span>
+          <div class="ic-label">Weather</div>
+          <div class="ic-value">Hot Desert Sun ☀️</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🥙</span>
+          <div class="ic-label">Fav Food</div>
+          <div class="ic-value">Shawarma & Dates</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🏗️</span>
+          <div class="ic-label">Landmark</div>
+          <div class="ic-value">Burj Khalifa</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🐪</span>
+          <div class="ic-label">Experience</div>
+          <div class="ic-value">Desert Safari 🏜️</div>
+        </div>
+        <div class="info-card">
+          <span class="ic-emoji">🛍️</span>
+          <div class="ic-label">Shopping</div>
+          <div class="ic-value">Dubai Mall</div>
+        </div>
+      </div>
+
+      <div class="highlights-title">✨ My Favourite Highlights</div>
+      <div class="highlights-grid">
+        <div class="highlight-item" style="--hc:#009688">
+          <span class="hi-emoji">🏙️</span>
+          <div class="hi-text"><strong>Burj Khalifa</strong><span>The tallest building in the world — the view from the top is out of this world!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#00796b">
+          <span class="hi-emoji">🏜️</span>
+          <div class="hi-text"><strong>Desert Safari</strong><span>Dune bashing, camel riding, and stars in the desert sky — pure magic!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#009688">
+          <span class="hi-emoji">⛲</span>
+          <div class="hi-text"><strong>Dubai Fountain</strong><span>The world's largest fountain dancing to music — absolutely breathtaking!</span></div>
+        </div>
+        <div class="highlight-item" style="--hc:#00796b">
+          <span class="hi-emoji">🕌</span>
+          <div class="hi-text"><strong>Sheikh Zayed Mosque</strong><span>The most beautiful mosque I've ever seen — white marble and pure elegance.</span></div>
+        </div>
+      </div>
+
+      <div class="memory-quote" style="--qc:#009688">
+        <p>"UAE made me feel like I was living in the future — golden deserts in the morning and a glittering skyline at night!" 🌙✨</p>
+        <span>— Pavi's favourite memory 🌸</span>
+      </div>
+      <div class="stamp" style="--sc:#009688">📍 Dream Destination ✅</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">💖 Pavi's Slam Book</div>
+        <p>A little book full of big memories, best friends &amp; beautiful moments. 🌸</p>
+        <div class="socials">
+          <a href="#">📸</a><a href="#">🎵</a><a href="#">📌</a><a href="#">🐦</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="aboutme.html">All About Me</a>
+        <a href="friends.html">My Friends</a>
+        <a href="years.html">Me Over the Years</a>
+      </div>
+      <div class="footer-links">
+        <h4>Memories</h4>
+        <a href="#">Favourite Moments</a>
+        <a href="#">School Days</a>
+        <a href="#">Fun &amp; Games</a>
+        <a href="#">Bucket List</a>
+      </div>
+      <div class="footer-links">
+        <h4>Connect</h4>
+        <a href="#">Leave a Message</a>
+        <a href="#">Sign My Book</a>
+        <a href="#">Send a Doodle</a>
+        <a href="#">Say Hi 👋</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Pavi's Slam Book. Made with 💖 — because every memory deserves to be kept forever.</p>
+    </div>
+  </footer>
+
+  <script>
+    function switchCountry(country, btn) {
+      // Deactivate all tabs & panels
+      document.querySelectorAll('.country-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.country-panel').forEach(p => p.classList.remove('active'));
+
+      // Activate selected
+      btn.classList.add('active');
+      document.getElementById('panel-' + country).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

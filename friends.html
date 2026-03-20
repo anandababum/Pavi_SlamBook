@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All About My Friends 💗 — Pavi's Slam Book</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ---- FRIENDS PAGE HERO ---- */
+    .friends-hero {
+      text-align: center;
+      padding: 56px 24px 32px;
+      background: linear-gradient(135deg, #fce7f3 0%, #ede9fe 50%, #e0f2fe 100%);
+    }
+    .friends-hero h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.8rem;
+      color: #c2185b;
+      text-shadow: 2px 2px 0 #ffd6e7;
+      margin-bottom: 10px;
+    }
+    .friends-hero p {
+      color: #ad1457;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    /* ---- FRIEND CARDS (interactive) ---- */
+    .friends-page-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 48px auto;
+      padding: 0 24px;
+    }
+
+    .friend-card-full {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 6px 28px rgba(164,60,140,.12);
+      overflow: hidden;
+      text-align: center;
+      transition: transform .3s, box-shadow .3s;
+      border: 2px solid #fce4ec;
+      cursor: pointer;
+      position: relative;
+    }
+    .friend-card-full:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 48px rgba(164,60,140,.22);
+    }
+
+    .friend-card-top {
+      padding: 28px 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .friend-card-top img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.12);
+      object-fit: cover;
+      transition: transform .3s;
+    }
+    .friend-card-full:hover .friend-card-top img {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .friend-card-body { padding: 18px 20px 24px; }
+    .friend-card-name {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.15rem;
+      color: #c2185b;
+      margin-bottom: 6px;
+    }
+    .friend-card-note {
+      font-size: .82rem;
+      color: #6b7280;
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    /* Traits pills */
+    .friend-traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .trait-pill {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* Favourite thing row */
+    .friend-fav {
+      background: #fff7f9;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: .8rem;
+      color: #555;
+      text-align: left;
+      border: 1px dashed #f48fb1;
+    }
+    .friend-fav span { font-weight: 700; color: #c2185b; }
+
+    /* Heart reaction button */
+    .heart-btn {
+      margin-top: 14px;
+      background: linear-gradient(135deg, #f9a8d4, #f472b6);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 8px 22px;
+      font-size: .82rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 14px rgba(244,114,182,.35);
+    }
+    .heart-btn:hover {
+      transform: scale(1.07);
+      box-shadow: 0 8px 20px rgba(244,114,182,.5);
+    }
+    .heart-btn.liked {
+      background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+    }
+
+    /* Confetti burst */
+    .burst {
+      position: absolute;
+      top: 12px; right: 14px;
+      font-size: 1.4rem;
+      opacity: 0;
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    .friend-card-full:hover .burst { opacity: 1; transform: scale(1.3) rotate(15deg); }
+
+    @media (max-width: 900px)  { .friends-page-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px)  { .friends-page-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">💖 Pavi's Slam Book</div>
+      <nav class="main-nav">
+        <a href="index.html#cover">Home</a>
+        <a href="index.html#featured">All about me</a>
+        <a href="friends.html" class="nav-active">All about my friends</a>
+        <a href="index.html#featured">Fashion</a>
+        <a href="journeys.html">My Journeys</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="friends-hero">
+    <div style="font-size:2.5rem; margin-bottom:12px;">💗👭💗</div>
+    <h1>All About My Friends</h1>
+    <p>The girls who make every chapter worth writing ✨</p>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>💖 Best Friends Forever</span><span>🌸 Giggles &amp; Secrets</span>
+      <span>✨ Adventures Together</span><span>🎀 Always There For You</span>
+      <span>💌 Friendship Goals</span><span>🌈 My Ride or Die</span>
+      <span>💖 Best Friends Forever</span><span>🌸 Giggles &amp; Secrets</span>
+      <span>✨ Adventures Together</span><span>🎀 Always There For You</span>
+      <span>💌 Friendship Goals</span><span>🌈 My Ride or Die</span>
+    </div>
+  </div>
+
+  <!-- FRIENDS GRID -->
+  <div class="friends-page-grid">
+
+    <!-- Friend 1 -->
+    <div class="friend-card-full" style="background: linear-gradient(180deg,#fce7f3 0%,#fff 40%)">
+      <span class="burst">🌸</span>
+      <div class="friend-card-top">
+        <img src="Photos/Riva.jpeg" alt="Riva" />
+      </div>
+      <div class="friend-card-body">
+        <div class="friend-card-name">Riva 🌸</div>
+        <div class="friend-card-note">"A creative and fun girl, her being there will turn a bad day into a good one."</div>
+        <div class="friend-traits">
+          <span class="trait-pill" style="background:#fce7f3;color:#be185d">😂 Funny</span>
+          <span class="trait-pill" style="background:#fde68a;color:#92400e">☀️ Cheerful</span>
+          <span class="trait-pill" style="background:#bbf7d0;color:#166534">💚 Kind</span>
+        </div>
+		<div class="friend-fav">🍜 Fav food: <span>Noodles</span></div>
+        <button class="heart-btn" onclick="toggleLike(this)">💖 Send Love</button>
+      </div>
+    </div>
+
+    <!-- Friend 2 -->
+    <div class="friend-card-full" style="background: linear-gradient(180deg,#e0f2fe 0%,#fff 40%)">
+      <span class="burst">⭐</span>
+      <div class="friend-card-top">
+        <img src="Photos/Nyssa.jpeg" alt="Nyssa" />
+      </div>
+      <div class="friend-card-body">
+        <div class="friend-card-name">Nyssa 💙</div>
+        <div class="friend-card-note">"Nyssa, you are a dreamy and kawaii girl, anyone who is bland you will turn them into a rainbow."</div>
+        <div class="friend-traits">
+          <span class="trait-pill" style="background:#e0f2fe;color:#0369a1">🤗 Caring</span>
+          <span class="trait-pill" style="background:#ede9fe;color:#6d28d9">🧠 Wise</span>
+          <span class="trait-pill" style="background:#fce7f3;color:#be185d">💌 Sweet</span>
+        </div>
+        <div class="friend-fav">📖 Fav story: <span>Mahabharat</span></div>
+        <button class="heart-btn" onclick="toggleLike(this)">💖 Send Love</button>
+      </div>
+    </div>
+
+    <!-- Friend 3 -->
+    <div class="friend-card-full" style="background: linear-gradient(180deg,#fef9c3 0%,#fff 40%)">
+      <span class="burst">🌟</span>
+      <div class="friend-card-top">
+        <img src="Photos/megan.jpeg" alt="Megan" />
+      </div>
+      <div class="friend-card-body">
+        <div class="friend-card-name">Megan 💛</div>
+        <div class="friend-card-note">"She is a smart and funny friend."</div>
+        <div class="friend-traits">
+          <span class="trait-pill" style="background:#fef9c3;color:#92400e">🌻 Warm</span>
+          <span class="trait-pill" style="background:#bbf7d0;color:#166534">🤝 Loyal</span>
+          <span class="trait-pill" style="background:#fce7f3;color:#be185d">🎨 Creative</span>
+        </div>
+        <div class="friend-fav">🎨 Fav colour: <span>Red</span></div>
+        <button class="heart-btn" onclick="toggleLike(this)">💖 Send Love</button>
+      </div>
+    </div>
+
+    <!-- Friend 4 -->
+    <div class="friend-card-full" style="background: linear-gradient(180deg,#ede9fe 0%,#fff 40%)">
+      <span class="burst">💫</span>
+      <div class="friend-card-top">
+        <img src="Photos/minha.jpg" alt="Minha" />
+      </div>
+      <div class="friend-card-body">
+        <div class="friend-card-name">Minha 💜</div>
+        <div class="friend-card-note">"She is the secret-keeper, the adventure partner, and the best hype girl all in one."</div>
+        <div class="friend-traits">
+          <span class="trait-pill" style="background:#ede9fe;color:#6d28d9">🤫 Trustworthy</span>
+          <span class="trait-pill" style="background:#fce7f3;color:#be185d">🔥 Bold</span>
+          <span class="trait-pill" style="background:#e0f2fe;color:#0369a1">🎤 Fun</span>
+        </div>
+        <div class="friend-fav">🎨 Fav colour: <span>Lavender</span></div>
+        <button class="heart-btn" onclick="toggleLike(this)">💖 Send Love</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">💖 Pavi's Slam Book</div>
+        <p>A little book full of big memories, best friends &amp; beautiful moments. 🌸</p>
+        <div class="socials">
+          <a href="#">📸</a><a href="#">🎵</a><a href="#">📌</a><a href="#">🐦</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Pages</h4>
+        <a href="index.html">Home</a>
+        <a href="aboutme.html">All About Me</a>
+        <a href="friends.html">My Friends</a>
+        <a href="years.html">Me Over the Years</a>
+      </div>
+      <div class="footer-links">
+        <h4>Memories</h4>
+        <a href="#">Favourite Moments</a>
+        <a href="#">School Days</a>
+        <a href="#">Fun &amp; Games</a>
+        <a href="#">Bucket List</a>
+      </div>
+      <div class="footer-links">
+        <h4>Connect</h4>
+        <a href="#">Leave a Message</a>
+        <a href="#">Sign My Book</a>
+        <a href="#">Send a Doodle</a>
+        <a href="#">Say Hi 👋</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Pavi's Slam Book. Made with 💖 — because every memory deserves to be kept forever.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleLike(btn) {
+      btn.classList.toggle('liked');
+      btn.textContent = btn.classList.contains('liked') ? '💜 Loved!' : '💖 Send Love';
+    }
+  </script>
+
+</body>
+</html>
