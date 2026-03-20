@@ -2,6 +2,23 @@
 // BLOOM — JavaScript
 // =============================================
 
+// ---- HAMBURGER MENU ----
+function toggleNav() {
+  const nav = document.getElementById('main-nav');
+  const btn = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+// Close menu when a nav link is clicked
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.main-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('main-nav').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+});
+
 // ---- TABS ----
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {

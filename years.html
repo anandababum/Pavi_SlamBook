@@ -273,7 +273,10 @@
   <header>
     <div class="header-inner">
       <div class="logo">💖 Pavi's Slam Book</div>
-      <nav class="main-nav">
+      <button class="hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
         <a href="index.html#cover">Home</a>
         <a href="index.html#featured">All about me</a>
         <a href="friends.html">All about my friends</a>
@@ -486,6 +489,7 @@
         <a href="aboutme.html">All About Me</a>
         <a href="friends.html">My Friends</a>
         <a href="years.html">Me Over the Years</a>
+        <a href="journeys.html">My Journeys</a>
       </div>
       <div class="footer-links">
         <h4>Memories</h4>
@@ -508,6 +512,16 @@
   </footer>
 
   <script>
+    function toggleNav() {
+      document.getElementById('main-nav').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    }
+    document.querySelectorAll('.main-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('main-nav').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('open');
+      });
+    });
     const cards = [
       { emoji:'👶', title:"My Very First Year 🍼",    caption:"Tiny fingers, tiny toes — the world just got a whole lot cuter!" },
       { emoji:'🐣', title:"Toddler Trouble 😈",        caption:"Walking, talking, and already running the house!" },
